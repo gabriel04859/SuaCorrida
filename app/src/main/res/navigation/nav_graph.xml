@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/setupFragment">
+
+    <action android:id="@+id/action_global_to_trackingFragment"
+        app:destination="@id/trackingFragment"
+        app:launchSingleTop="true"/>
+
+    <fragment
+        android:id="@+id/runFragment"
+        android:name="com.gabrielribeiro.suacorrida.ui.fragments.RunFragment"
+        android:label="Corrida"
+        tools:layout="@layout/fragment_run" >
+        <action
+            android:id="@+id/action_runFragment_to_trackingFragment"
+            app:destination="@id/trackingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.gabrielribeiro.suacorrida.ui.fragments.SettingsFragment"
+        android:label="Configurações"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/staticsFragment"
+        android:name="com.gabrielribeiro.suacorrida.ui.fragments.StaticsFragment"
+        android:label="Estatísticas"
+        tools:layout="@layout/fragment_statics" />
+    <fragment
+        android:id="@+id/trackingFragment"
+        android:name="com.gabrielribeiro.suacorrida.ui.fragments.TrackingFragment"
+        android:label="fragment_tracking"
+        tools:layout="@layout/fragment_tracking" >
+        <action
+            android:id="@+id/action_trackingFragment_to_runFragment"
+            app:destination="@id/runFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setupFragment"
+        android:name="com.gabrielribeiro.suacorrida.ui.fragments.SetupFragment"
+        android:label="fragment_setup"
+        tools:layout="@layout/fragment_setup" >
+        <action
+            android:id="@+id/action_setupFragment_to_runFragment"
+            app:destination="@id/runFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Sua Corrida</string>
+    <string name="google_maps_key"></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sua_corrida">Sua Corrida</string>
+    <string name="suas_corridas">Suas Corridas</string>
+    <string name="configura_es">Configurações</string>
+    <string name="estat_sticas">Estatísticas</string>
+    <string name="bem_vindo_n_informe_seu_nome_e_peso">Bem - Vindo \n Informe seu nome e peso</string>
+    <string name="nome">Nome</string>
+    <string name="peso">Peso</string>
+    <string name="aplicar_mudan_as">Aplicar mudanças</string>
+    <string name="need_location_permission">O aplicativo necessita da sua localizaçõa para funcionar</string>
+    <string name="comecar">Começar</string>
+    <string name="parar">Parar</string>
+    <string name="pausado">Pausado</string>
+    <string name="continua">Continue</string>
+    <string name="cancelar_corrida">Cancelar corrida?</string>
+    <string name="certeza_que_dejsesa_cancelar_corrida">Tem certeza de que deseja cancelar a corrida?</string>
+    <string name="sim">Sim</string>
+    <string name="nap">Não</string>
+    <string-array name="filter_options">
+        <item>Date</item>
+        <item>Running Time</item>
+        <item>Distance</item>
+        <item>Average Speed</item>
+        <item>Calories Burned</item>
+    </string-array>
+
+</resources>
