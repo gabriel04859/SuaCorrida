@@ -1,74 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorBlueSweet"
     android:layout_margin="8dp"
-    android:padding="8dp">
+    app:cardCornerRadius="10dp"
+    android:backgroundTint="@color/colorBlueSweet">
 
-    <ImageView
-        android:id="@+id/imageViewRunImage"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textViewDateItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="DATE"
-        app:layout_constraintEnd_toStartOf="@+id/textViewTimeItem"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewRunImage" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewRunImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textViewTimeItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="TIME"
-        app:layout_constraintEnd_toStartOf="@+id/textViewDistanceItem"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textViewDateItem"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewRunImage" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textViewDistanceItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="DISTANCE"
-        app:layout_constraintEnd_toStartOf="@+id/textViewAvgSpeedItem"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textViewTimeItem"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewRunImage" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewDateItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="DATE \n 20/20/20"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textViewAvgSpeedItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="AVGSPEED"
-        app:layout_constraintEnd_toStartOf="@+id/textViewCaloriesItem"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textViewDistanceItem"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewRunImage" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewTimeItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="TIME \n 00:00:34 H" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textViewCaloriesItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="CALORIES"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textViewAvgSpeedItem"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewRunImage" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewDistanceItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginEnd="3dp"
+                android:gravity="center"
+                android:text="DISTANCE \n 12 km" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewAvgSpeedItem"
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginEnd="3dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="AVGSPEED \n 111" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewCaloriesItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="CALORIES \n caliiiiiiiiiiiiiiiiiiiiiiiiiiorie"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

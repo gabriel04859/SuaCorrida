@@ -20,24 +20,20 @@ import com.gabrielribeiro.suacorrida.ui.viewmodel.MainViewModel
 import com.gabrielribeiro.suacorrida.utils.Constants.KEY_FIRST_TIME_TOGGLE
 import com.gabrielribeiro.suacorrida.utils.Constants.KEY_NAME
 import com.gabrielribeiro.suacorrida.utils.Constants.KEY_WEIGHT
+import com.gabrielribeiro.suacorrida.utils.Constants.TAG
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class SetupFragment : Fragment(R.layout.fragment_setup) {
     private var _binding  : FragmentSetupBinding? = null
     private val binding : FragmentSetupBinding get() = _binding!!
 
-    private val mainViewModel : MainViewModel by viewModels()
-
-    @set:Inject
-    var isFirstTimeOpenApp = true
-
-    @set:Inject
-    var weight = 70F
-
     @Inject
     lateinit var sharedPreferences : SharedPreferences
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,9 +47,13 @@ class SetupFragment : Fragment(R.layout.fragment_setup) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (!isFirstTimeOpenApp){
+        val isFirstTime = sharedPreferences.getBoolean(KEY_FIRST_TIME_TOGGLE, false)
+        Log.d(TAG, "onViewCreated: First Time: $isFirstTime")
+
+        if (isFirstTime){
             findNavController().navigate(R.id.action_setupFragment_to_runFragment)
         }
+
         binding.textViewContinue.setOnClickListener {
             val success = writePersonalDataToSharedPref()
             if (success){
@@ -74,7 +74,7 @@ class SetupFragment : Fragment(R.layout.fragment_setup) {
         sharedPreferences.edit()
                 .putString(KEY_NAME, name)
                 .putFloat(KEY_WEIGHT, weight.toFloat())
-                .putBoolean(KEY_FIRST_TIME_TOGGLE, false)
+                .putBoolean(KEY_FIRST_TIME_TOGGLE, true)
                 .apply()
 
 

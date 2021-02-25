@@ -59,15 +59,17 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
                 Glide.with(context).load(run.image).into(imageViewRun)
                 val calender = Calendar.getInstance().apply {
                     timeInMillis = run.timestamp
+
                 }
+
                 val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
-                textViewDateItem.text = dateFormat.format(calender.time)
-                val avgSpeed = "${run.avgSpeedInKMH}Km/H"
+                textViewDateItem.text = "Data \n ${dateFormat.format(calender.time)}"
+                val avgSpeed = "Velocidade \n ${run.avgSpeedInKMH}KM/H"
                 textViewAvgSpeedItem.text = avgSpeed
-                val distanceInMeters = "${run.distanceInMeters / 1000F}"
+                val distanceInMeters = "Metros \n ${run.distanceInMeters / 1000F}"
                 textViewDistanceItem.text = distanceInMeters
-                textViewTimeItem.text = TrackingUtility.getFormattedStopWatchTime(run.timeInMillis)
-                val caloriesBurned = "${run.caloriesBurned} Kcal"
+                textViewTimeItem.text = "Tempo \n ${TrackingUtility.getFormattedStopWatchTime(run.timeInMillis)}"
+                val caloriesBurned = "Calorias \n${run.caloriesBurned} Kcal"
                 textViewCaloriesItem.text = caloriesBurned
 
             }

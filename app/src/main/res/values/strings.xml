@@ -20,6 +20,9 @@
     <string name="certeza_que_dejsesa_cancelar_corrida">Tem certeza de que deseja cancelar a corrida?</string>
     <string name="sim">Sim</string>
     <string name="nap">Não</string>
+    <string name="alteracoes_salvas">Alterações salvas</string>
+    <string name="tente_novamente">Tente novamente</string>
+    <string name="terminar_corrida">Terminar corrida</string>
     <string-array name="filter_options">
         <item>Data</item>
         <item>Tempo da corrida</item>

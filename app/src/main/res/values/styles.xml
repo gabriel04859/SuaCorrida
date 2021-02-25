@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.SuaCorridaNew" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.SuaCorridaNew" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorBlueDark</item>
         <item name="colorPrimaryVariant">@color/colorBlueDark</item>

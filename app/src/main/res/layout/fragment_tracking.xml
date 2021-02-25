@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorBlueDark"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.TrackingFragment">
@@ -31,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="00:00:00:00"
+            android:textColor="@color/white"
             android:textSize="50sp"
             android:layout_gravity="center"/>
 
@@ -41,26 +43,30 @@
             android:layout_marginTop="22dp"
             android:gravity="center">
 
-            <com.google.android.material.button.MaterialButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/buttonToggleRun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_button_default"
+                android:textColor="@color/white"
                 android:layout_marginEnd="15dp"
-                android:text="Start"/>
+                android:text="@string/comecar"/>
 
-            <com.google.android.material.button.MaterialButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/buttonFinishRun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Finish Run"
+                android:text="@string/terminar_corrida"
+                android:background="@drawable/bg_button_default"
+                android:textColor="@color/white"
                 android:layout_marginStart="15dp"
                 android:visibility="gone"/>
 
-            <com.google.android.material.textview.MaterialTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewGo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Let's go, USERNAME!"
+                android:text="Você consegue \n Nome"
                 android:textAlignment="center"
                 android:textSize="50sp"
                 android:visibility="gone"
