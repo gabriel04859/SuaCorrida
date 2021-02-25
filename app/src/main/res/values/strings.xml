@@ -21,11 +21,11 @@
     <string name="sim">Sim</string>
     <string name="nap">Não</string>
     <string-array name="filter_options">
-        <item>Date</item>
-        <item>Running Time</item>
-        <item>Distance</item>
-        <item>Average Speed</item>
-        <item>Calories Burned</item>
+        <item>Data</item>
+        <item>Tempo da corrida</item>
+        <item>Distância</item>
+        <item>Average Velocidade</item>
+        <item>Calorias Queimadas</item>
     </string-array>
 
 </resources>

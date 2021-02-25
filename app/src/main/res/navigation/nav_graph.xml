@@ -44,6 +44,8 @@
         tools:layout="@layout/fragment_setup" >
         <action
             android:id="@+id/action_setupFragment_to_runFragment"
-            app:destination="@id/runFragment" />
+            app:destination="@id/runFragment"
+            app:popUpTo="@id/setupFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>
