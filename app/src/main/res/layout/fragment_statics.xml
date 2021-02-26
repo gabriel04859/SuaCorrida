@@ -7,103 +7,112 @@
     android:background="@color/colorBlueDark"
     tools:context=".ui.fragments.StaticsFragment">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewTotalTimeStatics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/textViewTotalDistanceStatics"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="00:00:03" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewTotalDistanceStatics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textViewTotalTimeStatics"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="00:00:03" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewTotalTimeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tempo Total"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:layout_marginTop="6dp"
-        app:layout_constraintEnd_toEndOf="@+id/textViewTotalTimeStatics"
-        app:layout_constraintStart_toStartOf="@+id/textViewTotalTimeStatics"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTotalTimeStatics" />
-
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewTotalDistanceText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tempo Total"
+        android:text="@string/dist_ncia_total"
         android:textColor="@color/white"
-        android:layout_marginTop="6dp"
-        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSpeedText"
         app:layout_constraintEnd_toEndOf="@+id/textViewTotalDistanceStatics"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/textViewTotalDistanceStatics"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTotalDistanceStatics" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewTotalCaloriesBurnedStatics"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewTotalDistanceStatics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        tools:text="0km"
         android:textColor="@color/white"
-        android:textSize="30dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/textViewTotalTimeText"
-        app:layout_constraintStart_toStartOf="@+id/textViewTotalTimeText"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTotalTimeText"
-        tools:text="3kcal" />
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTotalDistanceText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewTotalTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tempo_total"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCaloriesBurnedText"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTotalTimeStatics"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/textViewTotalTimeStatics"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewTotalTimeStatics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="00:00:00"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTotalTimeText"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewCaloriesBurnedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total calorias"
+        android:text="@string/calorias_total"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="@+id/textViewTotalCaloriesBurnedStatics"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/textViewTotalCaloriesBurnedStatics"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTotalCaloriesBurnedStatics" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewTotalSpeedStatics"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewTotalCaloriesBurnedStatics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        tools:text="0kcal"
         android:textColor="@color/white"
-        android:textSize="22sp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintEnd_toEndOf="@+id/textViewTotalDistanceText"
-        app:layout_constraintStart_toStartOf="@+id/textViewTotalDistanceText"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTotalDistanceText"
-        tools:text="50.7Km/h" />
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCaloriesBurnedText"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewSpeedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total Velocidade"
+        android:text="@string/velocidade_total"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="@+id/textViewTotalSpeedStatics"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/textViewTotalSpeedStatics"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTotalSpeedStatics" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewTotalSpeedStatics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="0km/h"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSpeedText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7017784" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

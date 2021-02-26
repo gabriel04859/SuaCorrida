@@ -23,6 +23,11 @@
     <string name="alteracoes_salvas">Alterações salvas</string>
     <string name="tente_novamente">Tente novamente</string>
     <string name="terminar_corrida">Terminar corrida</string>
+    <string name="dist_ncia_total">Distância total</string>
+    <string name="tempo_total">Tempo total</string>
+    <string name="calorias_total">Calorias total</string>
+    <string name="velocidade_total">Velocidade total</string>
+    <string name="initial_time">00:00:00:00</string>
     <string-array name="filter_options">
         <item>Data</item>
         <item>Tempo da corrida</item>

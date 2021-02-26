@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         navController = findNavController(R.id.navHostFragment)
         binding.bottomNavigationViewMain.setupWithNavController(navController)
+        binding.bottomNavigationViewMain.setOnNavigationItemReselectedListener { /* NO-OP */ }
         appBarConfiguration = AppBarConfiguration(navController.graph)
         NavigationUI.setupActionBarWithNavController(this,navController)
 

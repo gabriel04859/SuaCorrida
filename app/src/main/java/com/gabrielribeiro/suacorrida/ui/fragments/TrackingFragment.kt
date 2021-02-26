@@ -17,10 +17,12 @@ import com.gabrielribeiro.suacorrida.model.Run
 import com.gabrielribeiro.suacorrida.service.Polyline
 import com.gabrielribeiro.suacorrida.service.TrackingService
 import com.gabrielribeiro.suacorrida.ui.viewmodel.MainViewModel
+import com.gabrielribeiro.suacorrida.utils.CancelTrackingDialog
 import com.gabrielribeiro.suacorrida.utils.Constants.ACTION_PAUSE_SERVICE
 import com.gabrielribeiro.suacorrida.utils.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.gabrielribeiro.suacorrida.utils.Constants.ACTION_STOP_SERVICE
 import com.gabrielribeiro.suacorrida.utils.Constants.CAMERA_ZOOM
+import com.gabrielribeiro.suacorrida.utils.Constants.CANCEL_TRACKING_DIALOG_TAG
 import com.gabrielribeiro.suacorrida.utils.Constants.POLYLINE_COLOR
 import com.gabrielribeiro.suacorrida.utils.Constants.POLYLINE_WIDTH
 import com.gabrielribeiro.suacorrida.utils.TrackingUtility
@@ -62,6 +64,13 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if(savedInstanceState != null){
+            val cancelTrackingDialog = parentFragmentManager.findFragmentByTag(
+                    CANCEL_TRACKING_DIALOG_TAG) as CancelTrackingDialog?
+            cancelTrackingDialog?.setYesListener {
+                stopRun()
+            }
+        }
         binding.mapView.onCreate(savedInstanceState)
 
         binding.mapView.getMapAsync {
@@ -121,10 +130,10 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     private fun updateTracking(isTracking : Boolean){
         this.isTracking = isTracking
-        if (!isTracking){
+        if (!isTracking && currentTimeMillis > 0L){
             binding.buttonToggleRun.text = getString(R.string.comecar)
             binding.buttonFinishRun.visibility = View.VISIBLE
-        }else{
+        }else if(isTracking){
             binding.buttonToggleRun.text = getString(R.string.parar)
             binding.buttonFinishRun.visibility = View.GONE
             menu?.getItem(0)?.isVisible = true
@@ -215,7 +224,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             mainViewModel.insertRun(run)
             Snackbar.make(
                     requireActivity().findViewById(R.id.rootView),
-                    "Run saved successfully",
+                    "Corrida salva",
                     Snackbar.LENGTH_LONG
             ).show()
             stopRun()
@@ -224,24 +233,16 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
 
     private fun showCancelTrackingDialog() {
-        val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
-                .setTitle(getString(R.string.cancelar_corrida))
-                .setMessage(getString(R.string.certeza_que_dejsesa_cancelar_corrida))
-                .setIcon(R.drawable.ic_delete)
-                .setPositiveButton(getString(R.string.sim)){_ , _ ->
-                    stopRun()
-                }
-                .setNegativeButton(getString(R.string.nap)){dialogInterface, _ ->
-                    dialogInterface.cancel()
-
-                }
-                .create()
-        dialog.show()
-
+        CancelTrackingDialog().apply {
+            setYesListener {
+                stopRun()
+            }
+        }.show(parentFragmentManager, CANCEL_TRACKING_DIALOG_TAG)
 
     }
 
     private fun stopRun() {
+        binding.textViewTimer.text = getString(R.string.initial_time)
         sendCommandToService(ACTION_STOP_SERVICE)
         findNavController().navigate(R.id.action_trackingFragment_to_runFragment)
     }
