@@ -60,6 +60,10 @@ class StaticsFragment : Fragment(R.layout.fragment_statics) {
 
         staticsViewModel.totalAvgSpeed.observe(viewLifecycleOwner, Observer {
             it?.let {
+                if(it == 0.0F){
+                    val speed  = "0.0km/h"
+                    binding.textViewTotalDistanceStatics.text = speed
+                }
                 val speed = round(it * 10F) / 10F
                 Log.d(TAG, "observerValuesFromUser: Total velocidade: $speed -- $it")
                 val speedString = "${speed}km/h"

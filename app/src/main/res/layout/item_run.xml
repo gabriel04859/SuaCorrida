@@ -3,9 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp"
     app:cardCornerRadius="10dp"
-    android:backgroundTint="@color/colorBlueSweet">
+    android:backgroundTint="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,8 +16,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewRunImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorAccent" />
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,9 +29,9 @@
                 android:id="@+id/textViewDateItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="#2C2C2C"
                 android:gravity="center"
-                android:text="DATE \n 20/20/20"/>
+                tools:text="DATE \n 20/20/20"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewTimeItem"
@@ -40,34 +40,34 @@
                 android:layout_marginStart="3dp"
                 android:layout_marginEnd="3dp"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="#2C2C2C"
                 android:text="TIME \n 00:00:34 H" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewDistanceItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="#2C2C2C"
                 android:layout_marginEnd="3dp"
                 android:gravity="center"
-                android:text="DISTANCE \n 12 km" />
+                tools:text="DISTANCE \n 12 km" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewAvgSpeedItem"
                 android:layout_width="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="#2C2C2C"
                 android:layout_marginEnd="3dp"
                 android:gravity="center"
                 android:layout_height="wrap_content"
-                android:text="AVGSPEED \n 111" />
+                tools:text="AVGSPEED \n 111" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewCaloriesItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:text="CALORIES \n caliiiiiiiiiiiiiiiiiiiiiiiiiiorie"/>
+                android:textColor="#2C2C2C"
+                tools:text="CALORIES \n 10kcal"/>
 
 
         </LinearLayout>

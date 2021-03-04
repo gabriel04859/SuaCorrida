@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorBlueDark"
     tools:context=".ui.fragments.SetupFragment">
 
     <TextView
@@ -78,7 +77,7 @@
         android:layout_height="wrap_content"
         android:text="Continue"
         android:textStyle="bold"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:layout_margin="22dp"
         app:layout_constraintBottom_toBottomOf="parent"

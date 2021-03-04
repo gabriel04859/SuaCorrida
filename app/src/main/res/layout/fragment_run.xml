@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlueDark"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.RunFragment">
 
@@ -14,7 +13,7 @@
         android:layout_marginStart="22dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="22dp"
-        android:backgroundTint="@color/colorBlueSweet"
+        android:backgroundTint="@color/white"
         app:cardCornerRadius="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,19 +27,20 @@
             android:orientation="horizontal"
             android:padding="12dp">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewFilterBy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sort by:"
-                android:textColor="@color/white"
+                android:text="Ordenar por:"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
                 android:textSize="16sp" />
 
             <Spinner
                 android:id="@+id/spinnerFilter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorBlueSweet"
+                android:background="@color/white"
                 android:entries="@array/filter_options" />
 
         </LinearLayout>
@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
         app:fabSize="normal"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
