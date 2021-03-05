@@ -16,22 +16,36 @@
         tools:layout="@layout/fragment_run" >
         <action
             android:id="@+id/action_runFragment_to_trackingFragment"
-            app:destination="@id/trackingFragment" />
+            app:destination="@id/trackingFragment"
+    	    app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.gabrielribeiro.suacorrida.ui.fragments.SettingsFragment"
         android:label="Configurações"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings"
+	app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left" />
+
     <fragment
         android:id="@+id/staticsFragment"
         android:name="com.gabrielribeiro.suacorrida.ui.fragments.StaticsFragment"
         android:label="Estatísticas"
-        tools:layout="@layout/fragment_statics" />
+        tools:layout="@layout/fragment_statics"
+	app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left" />
+
     <fragment
         android:id="@+id/trackingFragment"
         android:name="com.gabrielribeiro.suacorrida.ui.fragments.TrackingFragment"
-        android:label="fragment_tracking"
+        android:label="Sua corrida"
         tools:layout="@layout/fragment_tracking" >
         <action
             android:id="@+id/action_trackingFragment_to_runFragment"
@@ -40,12 +54,11 @@
     <fragment
         android:id="@+id/setupFragment"
         android:name="com.gabrielribeiro.suacorrida.ui.fragments.SetupFragment"
-        android:label="fragment_setup"
+        android:label="Sua informações"
         tools:layout="@layout/fragment_setup" >
         <action
             android:id="@+id/action_setupFragment_to_runFragment"
             app:destination="@id/runFragment"
-            app:popUpTo="@id/setupFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpTo="@id/setupFragment"/>
     </fragment>
 </navigation>

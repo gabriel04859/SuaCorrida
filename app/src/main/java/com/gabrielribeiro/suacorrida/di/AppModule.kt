@@ -35,25 +35,22 @@ object AppModule {
     @Singleton
     fun provideRunDAO(runDatabase: RunDatabase) = runDatabase.runDAO()
 
-    @Provides
-    @Singleton
-    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences
-    = context.getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE)
-
     @Singleton
     @Provides
-    fun provideName(sharedPreferences: SharedPreferences) = sharedPreferences.getString(KEY_NAME, "") ?: ""
+    fun provideSharedPreferences(@ApplicationContext app: Context) =
+            app.getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE)
 
     @Singleton
     @Provides
-    fun provideWeight(sharedPreferences: SharedPreferences) = sharedPreferences.getFloat(KEY_WEIGHT, 0f)
+    fun provideName(sharedPref: SharedPreferences) = sharedPref.getString(KEY_NAME, "") ?: ""
 
     @Singleton
     @Provides
-    fun provideFirstTimeToggle(sharedPreferences: SharedPreferences) =
-            sharedPreferences.getBoolean(KEY_FIRST_TIME_TOGGLE, false)
+    fun provideWeight(sharedPref: SharedPreferences) = sharedPref.getFloat(KEY_WEIGHT, 72F)
 
-
-
+    @Singleton
+    @Provides
+    fun provideFirstTimeToggle(sharedPref: SharedPreferences) =
+            sharedPref.getBoolean(KEY_FIRST_TIME_TOGGLE, true)
 
 }

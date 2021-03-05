@@ -44,20 +44,19 @@ object TrackingUtility {
                 "${if(milliseconds < 10) "0" else ""}$milliseconds"
     }
 
-
     fun calculatePolylineLength(polyline: Polyline): Float {
         var distance = 0f
         for(i in 0..polyline.size - 2) {
-            val pos1 = polyline[i]
-            val pos2 = polyline[i + 1]
+            val position1 = polyline[i]
+            val position2 = polyline[i + 1]
 
             val result = FloatArray(1)
             Location.distanceBetween(
-                pos1.latitude,
-                pos1.longitude,
-                pos2.latitude,
-                pos2.longitude,
-                result
+                    position1.latitude,
+                    position1.longitude,
+                    position2.latitude,
+                    position2.longitude,
+                    result
             )
             distance += result[0]
         }

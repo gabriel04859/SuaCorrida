@@ -18,30 +18,35 @@ import dagger.hilt.android.scopes.ServiceScoped
 @Module
 @InstallIn(ServiceComponent::class)
 object ServiceModule {
+    @ServiceScoped
+    @Provides
+    fun provideFusedLocationProviderClient(
+            @ApplicationContext app: Context
+    ) = FusedLocationProviderClient(app)
 
     @ServiceScoped
     @Provides
-    fun provideFusedLocationProviderClient( @ApplicationContext context: Context)
-    = FusedLocationProviderClient(context)
-
-    @ServiceScoped
-    @Provides
-    fun provideMainActivityPendingIntent(@ApplicationContext context: Context) = PendingIntent.getActivity(
-        context, 0, Intent(context, MainActivity::class.java).apply {
-            action = Constants.ACTION_SHOW_TRACKING_FRAGMENT
-        },
-        PendingIntent.FLAG_UPDATE_CURRENT
+    fun provideMainActivityPendingIntent(
+            @ApplicationContext app: Context
+    ) = PendingIntent.getActivity(
+            app,
+            0,
+            Intent(app, MainActivity::class.java).also {
+                it.action = Constants.ACTION_SHOW_TRACKING_FRAGMENT
+            },
+            PendingIntent.FLAG_UPDATE_CURRENT
     )
 
-
     @ServiceScoped
     @Provides
-    fun provideBaseNotificationBuilder(@ApplicationContext context: Context, pendingIntent: PendingIntent)
-        = NotificationCompat.Builder(context,
-        Constants.NOTIFICATION_CHANNEL_ID)
-        .setAutoCancel(false)
-        .setSmallIcon(R.drawable.ic_run)
-        .setContentTitle(context.getString(R.string.app_name))
-        .setContentText("00:00:00")
-        .setContentIntent(pendingIntent)
+    fun provideBaseNotificationBuilder(
+            @ApplicationContext app: Context,
+            pendingIntent: PendingIntent
+    ) = NotificationCompat.Builder(app, Constants.NOTIFICATION_CHANNEL_ID)
+            .setAutoCancel(false)
+            .setOngoing(true)
+            .setSmallIcon(R.drawable.ic_run)
+            .setContentTitle("Sua corrida")
+            .setContentText("00:00:00")
+            .setContentIntent(pendingIntent)
 }

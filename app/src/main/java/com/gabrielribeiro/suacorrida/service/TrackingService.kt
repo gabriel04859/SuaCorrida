@@ -53,6 +53,8 @@ class TrackingService : LifecycleService() {
 
     private var isFirstRun = true
 
+    private var serviceKill = false
+
     private var isTimerEnable = false
     private var lapTime = 0L
     private var timeRun = 0L
@@ -61,16 +63,16 @@ class TrackingService : LifecycleService() {
 
     private val timeRunInSeconds = MutableLiveData<Long>()
 
-    private var serviceKill = false
 
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
     @Inject
-    lateinit var baseNotification : NotificationCompat.Builder
+    lateinit var baseNotification: NotificationCompat.Builder
 
     private lateinit var curNotificationBuilder: NotificationCompat.Builder
 
-    companion object{
+    companion object {
         val isTracking = MutableLiveData<Boolean>()
         val pathPoints = MutableLiveData<Polylines>()
 
@@ -80,10 +82,8 @@ class TrackingService : LifecycleService() {
 
     override fun onCreate() {
         super.onCreate()
-        postInitialValues()
-
         curNotificationBuilder = baseNotification
-
+        postInitialValues()
         isTracking.observe(this, Observer {
             updateLocationTracking(it)
             updateNotificationTrackingState(it)
@@ -91,16 +91,15 @@ class TrackingService : LifecycleService() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        intent?.let{
-            when(it.action){
-                ACTION_START_OR_RESUME_SERVICE ->{
-                    if (isFirstRun){
+        intent?.let {
+            when (it.action) {
+                ACTION_START_OR_RESUME_SERVICE -> {
+                    if (isFirstRun) {
                         startForegroundService()
                         isFirstRun = false
-                    }else{
+                    } else {
                         starTimer()
                     }
-
                 }
                 ACTION_PAUSE_SERVICE -> {
                     pauseService()
@@ -124,38 +123,40 @@ class TrackingService : LifecycleService() {
     }
 
     @SuppressLint("MissingPermission")
-    private fun updateLocationTracking(isTracking : Boolean){
-        if (isTracking){
-            if (TrackingUtility.hasLocationPermission(this)){
+    private fun updateLocationTracking(isTracking: Boolean) {
+        if (isTracking) {
+            if (TrackingUtility.hasLocationPermission(this)) {
                 val request = LocationRequest().apply {
                     interval = LOCATION_UPDATE_INTERVAL
                     fastestInterval = FAST_LOCATION_INTERVAL
                     priority = PRIORITY_HIGH_ACCURACY
                 }
-                fusedLocationProviderClient.requestLocationUpdates(request,
-                locationCallback,
-                Looper.getMainLooper())
+                fusedLocationProviderClient.requestLocationUpdates(
+                        request,
+                        locationCallback,
+                        Looper.getMainLooper()
+                )
             }
-
-        }else{
+        } else {
             fusedLocationProviderClient.removeLocationUpdates(locationCallback)
         }
     }
 
-    private val locationCallback = object : LocationCallback(){
+    val locationCallback = object : LocationCallback() {
         override fun onLocationResult(result: LocationResult?) {
             super.onLocationResult(result)
-            if (isTracking.value!!){
+            if (isTracking.value!!) {
                 result?.locations?.let { locations ->
-                    for (location in locations){
+                    for (location in locations) {
                         addPathPoint(location)
-                        Log.d("TESTE", "onLocationResult: $location ")
+                        Log.d(TAG, "onLocationResult: Location: ${location.latitude} - ${location.longitude}")
                     }
                 }
             }
         }
     }
-    private fun  addPathPoint(location: Location?){
+
+    private fun addPathPoint(location: Location?) {
         location?.let {
             val pos = LatLng(location.latitude, location.longitude)
             pathPoints.value?.apply {
@@ -165,7 +166,7 @@ class TrackingService : LifecycleService() {
         }
     }
 
-    private fun postInitialValues(){
+    private fun postInitialValues() {
         isTracking.postValue(false)
         pathPoints.postValue(mutableListOf())
         timeRunInSeconds.postValue(0L)
@@ -178,24 +179,21 @@ class TrackingService : LifecycleService() {
     } ?: pathPoints.postValue(mutableListOf(mutableListOf()))
 
 
-
     private fun pauseService() {
         isTracking.postValue(false)
         isTimerEnable = false
-
-
     }
 
-    private fun starTimer(){
+    private fun starTimer() {
         addEmptyPolyline()
         isTracking.postValue(true)
         timeStarted = System.currentTimeMillis()
         isTimerEnable = true
         CoroutineScope(Dispatchers.Main).launch {
-            while (isTracking.value!!){
+            while (isTracking.value!!) {
                 lapTime = System.currentTimeMillis() - timeStarted
                 timeRunInMillis.postValue(timeRun + lapTime)
-                if (timeRunInMillis.value!! >= lastSecondTimestamp + 1000L){
+                if (timeRunInMillis.value!! >= lastSecondTimestamp + 1000L) {
                     timeRunInSeconds.postValue(timeRunInSeconds.value!! + 1)
                     lastSecondTimestamp += 1000L
                 }
@@ -206,60 +204,61 @@ class TrackingService : LifecycleService() {
 
 
         Log.d(TAG, "starTimer: Time Run: $timeRun")
+
     }
 
-    private fun startForegroundService(){
+    private fun startForegroundService() {
         starTimer()
         isTracking.postValue(true)
-
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)
+                as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel(notificationManager)
         }
-
-
         startForeground(NOTIFICATION_ID, baseNotification.build())
         timeRunInSeconds.observe(this, Observer {
-            if (!serviceKill){
-                val notification = curNotificationBuilder.setContentText(TrackingUtility.getFormattedStopWatchTime(it * 1000L))
+            if (!serviceKill) {
+                val notification = curNotificationBuilder
+                        .setContentText(TrackingUtility.getFormattedStopWatchTime(it * 1000L))
                 notificationManager.notify(NOTIFICATION_ID, notification.build())
             }
         })
-
     }
 
-    private fun updateNotificationTrackingState(isTracking: Boolean){
+    private fun updateNotificationTrackingState(isTracking: Boolean) {
         val notificationActionText = if (isTracking) getString(R.string.pausado) else getString(R.string.continua)
         val pendingIntent = if (isTracking) {
             val pauseIntent = Intent(this, TrackingService::class.java).apply {
                 action = ACTION_PAUSE_SERVICE
             }
-            getService(this, 1, pauseIntent, FLAG_UPDATE_CURRENT)
-        }else{
+            PendingIntent.getService(this, 1, pauseIntent, FLAG_UPDATE_CURRENT)
+        } else {
             val resumeIntent = Intent(this, TrackingService::class.java).apply {
                 action = ACTION_START_OR_RESUME_SERVICE
             }
-            getService(this, 2, resumeIntent, FLAG_UPDATE_CURRENT)
+            PendingIntent.getService(this, 2, resumeIntent, FLAG_UPDATE_CURRENT)
         }
+
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         curNotificationBuilder.javaClass.getDeclaredField("mActions").apply {
             isAccessible = true
-            set(curNotificationBuilder,ArrayList<NotificationCompat.Action>())
+            set(curNotificationBuilder, ArrayList<NotificationCompat.Action>())
         }
-        if (!serviceKill){
-            curNotificationBuilder = baseNotification.addAction(R.drawable.ic_pause, notificationActionText, pendingIntent)
+        if (!serviceKill) {
+            curNotificationBuilder = baseNotification
+                    .addAction(R.drawable.ic_pause, notificationActionText, pendingIntent)
             notificationManager.notify(NOTIFICATION_ID, curNotificationBuilder.build())
         }
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel(notificationManager : NotificationManager){
+    private fun createNotificationChannel(notificationManager: NotificationManager) {
         val channel = NotificationChannel(
                 NOTIFICATION_CHANNEL_ID,
                 NOTIFICATION_CHANNEL_NAME,
-                IMPORTANCE_LOW)
+                IMPORTANCE_LOW
+        )
         notificationManager.createNotificationChannel(channel)
     }
 

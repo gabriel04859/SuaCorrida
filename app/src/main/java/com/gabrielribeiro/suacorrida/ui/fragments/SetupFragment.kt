@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.gabrielribeiro.suacorrida.R
 import com.gabrielribeiro.suacorrida.database.RunDAO
@@ -35,10 +36,14 @@ class SetupFragment : Fragment(R.layout.fragment_setup) {
 
 
 
+    @set:Inject
+    var isFirstAppOpen = true
+
+    private var isFirstTime = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentSetupBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -47,11 +52,17 @@ class SetupFragment : Fragment(R.layout.fragment_setup) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val isFirstTime = sharedPreferences.getBoolean(KEY_FIRST_TIME_TOGGLE, false)
-        Log.d(TAG, "onViewCreated: First Time: $isFirstTime")
+        Log.d(TAG, "onViewCreated: First Time: $isFirstAppOpen")
 
-        if (isFirstTime){
-            findNavController().navigate(R.id.action_setupFragment_to_runFragment)
+        if(!isFirstAppOpen) {
+            val navOptions = NavOptions.Builder()
+                    .setPopUpTo(R.id.setupFragment, true)
+                    .build()
+            findNavController().navigate(
+                    R.id.action_setupFragment_to_runFragment,
+                    savedInstanceState,
+                    navOptions
+            )
         }
 
         binding.textViewContinue.setOnClickListener {
@@ -74,7 +85,7 @@ class SetupFragment : Fragment(R.layout.fragment_setup) {
         sharedPreferences.edit()
                 .putString(KEY_NAME, name)
                 .putFloat(KEY_WEIGHT, weight.toFloat())
-                .putBoolean(KEY_FIRST_TIME_TOGGLE, true)
+                .putBoolean(KEY_FIRST_TIME_TOGGLE, false)
                 .apply()
 
 
